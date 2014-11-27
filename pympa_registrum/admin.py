@@ -2,19 +2,8 @@
 from __future__ import unicode_literals, absolute_import
 
 from django.contrib import admin
-from django import forms
+
 from .models import Comunicazione, MezzoComunicazione
-
-
-class ComunicazioneAdminForm(forms.ModelForm):
-    class Meta:
-        model = Comunicazione
-
-    def clean_mittente_cognome(self):
-        return self.cleaned_data['mittente_cognome'].title()
-
-    def clean_mittente_nome(self):
-        return self.cleaned_data['mittente_nome'].title()
 
 
 class ComunicazioneAdmin(admin.ModelAdmin):
@@ -24,7 +13,6 @@ class ComunicazioneAdmin(admin.ModelAdmin):
               'mittente_nome', 'mezzo', 'motivazione', 'recapito', 'note',
               'evasa']
     filter_horizontal = ['destinatari']
-    form = ComunicazioneAdminForm
     list_display = ['id', 'ricezione_data', 'ld_elenco_destinatari', 'evasa',
                     'mittente_cognome', 'mittente_nome',
                     'recapito', 'motivazione', 'ld_ricevente']
